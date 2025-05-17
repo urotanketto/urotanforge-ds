@@ -40,4 +40,9 @@ impl<T> Stack<T> {
     pub fn size(&self) -> usize {
         self.items.len()
     }
+
+    /// Remove all elements from the stack.
+    pub fn clear(&mut self) {
+        self.items.clear();
+    }
 }

@@ -23,6 +23,7 @@ This implementation uses a generic `Vec<T>` internally.
 - `peek()`: View the top item without removing
 - `is_empty()`: Check if the stack is empty
 - `size()`: Get the number of items in the stack
+- `clear()`: Remove all elements from the stack
 
 ### Example
 
