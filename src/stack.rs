@@ -1,10 +1,10 @@
-/// A simple stack implementation using Vec<T>
+/// A simple stack implementation using `Vec<T>`
 ///
 /// Stack is a Last-In First-Out (LIFO) data structure.
 /// Typical operations are:
-/// - push: insert an element
-/// - pop: remove the most recently inserted element
-/// - peek: look at the top element without removing it
+/// - `push`: insert an element
+/// - `pop`: remove the most recently inserted element
+/// - `peek`: look at the top element without removing it
 #[derive(Debug, Clone)]
 pub struct Stack<T> {
     items: Vec<T>,
