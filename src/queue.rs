@@ -12,6 +12,12 @@ pub struct Queue<T> {
     items: VecDeque<T>,
 }
 
+impl<T> Default for Queue<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> Queue<T> {
     /// Create a new empty queue.
     pub fn new() -> Self {

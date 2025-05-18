@@ -10,6 +10,12 @@ pub struct Stack<T> {
     items: Vec<T>,
 }
 
+impl<T> Default for Stack<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> Stack<T> {
     /// Create a new, empty stack.
     pub fn new() -> Self {
