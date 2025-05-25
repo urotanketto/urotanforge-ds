@@ -40,3 +40,22 @@ impl<T> TreeNode<T> {
         }
     }
 }
+
+impl<T: PartialEq> TreeNode<T> {
+    /// Recursively checks whether the tree contains the given value.
+    pub fn contains(&self, target: &T) -> bool {
+        if &self.value == target {
+            true
+        } else {
+            let left_contains = self
+                .left
+                .as_ref()
+                .map_or(false, |node| node.contains(target));
+            let right_contains = self
+                .right
+                .as_ref()
+                .map_or(false, |node| node.contains(target));
+            left_contains || right_contains
+        }
+    }
+}
