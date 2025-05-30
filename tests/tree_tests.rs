@@ -1,22 +1,24 @@
 use urotanforge_ds::tree::TreeNode;
 
 #[test]
-fn test_in_order_traversal() {
-    let mut root = TreeNode::new(1);
-    root.insert_left(2);
-    root.insert_right(3);
+fn test_bst_insert_and_traversal() {
+    let mut root = TreeNode::new(10);
+    root.insert(5);
+    root.insert(15);
+    root.insert(7);
+    root.insert(3);
 
     let mut visited = Vec::new();
     root.in_order_traversal(&mut |v| visited.push(*v));
 
-    assert_eq!(visited, vec![2, 1, 3]);
+    assert_eq!(visited, vec![3, 5, 7, 10, 15]);
 }
 
 #[test]
-fn test_tree_contains() {
+fn test_bst_contains() {
     let mut root = TreeNode::new(10);
-    root.insert_left(5);
-    root.insert_right(15);
+    root.insert(5);
+    root.insert(15);
 
     assert!(root.contains(&10));
     assert!(root.contains(&5));

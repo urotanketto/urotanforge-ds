@@ -9,7 +9,7 @@ pub struct TreeNode<T> {
     pub right: Option<Box<TreeNode<T>>>,
 }
 
-impl<T> TreeNode<T> {
+impl<T: Ord> TreeNode<T> {
     /// Create a new leaf node.
     pub fn new(value: T) -> Self {
         TreeNode {
@@ -19,14 +19,19 @@ impl<T> TreeNode<T> {
         }
     }
 
-    /// Insert a node to the left.
-    pub fn insert_left(&mut self, value: T) {
-        self.left = Some(Box::new(TreeNode::new(value)));
-    }
-
-    /// Insert a node to the right.
-    pub fn insert_right(&mut self, value: T) {
-        self.right = Some(Box::new(TreeNode::new(value)));
+    /// Insert a value into the binary search tree.
+    pub fn insert(&mut self, value: T) {
+        if value < self.value {
+            match self.left {
+                Some(ref mut left) => left.insert(value),
+                None => self.left = Some(Box::new(TreeNode::new(value))),
+            }
+        } else {
+            match self.right {
+                Some(ref mut right) => right.insert(value),
+                None => self.right = Some(Box::new(TreeNode::new(value))),
+            }
+        }
     }
 
     /// In-order traversal: left -> root -> right
@@ -39,23 +44,19 @@ impl<T> TreeNode<T> {
             right.in_order_traversal(visit);
         }
     }
-}
 
-impl<T: PartialEq> TreeNode<T> {
-    /// Recursively checks whether the tree contains the given value.
+    /// Check whether the tree contains the given value.
     pub fn contains(&self, target: &T) -> bool {
         if &self.value == target {
             true
+        } else if target < &self.value {
+            self.left
+                .as_ref()
+                .map_or(false, |node| node.contains(target))
         } else {
-            let left_contains = self
-                .left
+            self.right
                 .as_ref()
-                .map_or(false, |node| node.contains(target));
-            let right_contains = self
-                .right
-                .as_ref()
-                .map_or(false, |node| node.contains(target));
-            left_contains || right_contains
+                .map_or(false, |node| node.contains(target))
         }
     }
 }
