@@ -59,4 +59,11 @@ impl<T: Ord> TreeNode<T> {
                 .map_or(false, |node| node.contains(target))
         }
     }
+
+    /// Returns the height (maximum depth) of the tree.
+    pub fn height(&self) -> usize {
+        let left_height = self.left.as_ref().map_or(0, |node| node.height());
+        let right_height = self.right.as_ref().map_or(0, |node| node.height());
+        1 + left_height.max(right_height)
+    }
 }
